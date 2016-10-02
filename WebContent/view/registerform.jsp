@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,10 +16,11 @@ div.ex {
 </style>
 </head>
 <body>
-	<h1>Login Form</h1>
+	<h1>Registeration Form</h1>
 	<div class=ex">
-		<form action="/helloMVC/doLogin" method="post">
+		<form action="/helloMVC/doRegister" method="post">
 			<table cellpadding="5">
+			<h2> Enter Information Here</h2>
 			<tr>
 			<td>아이디</td>
 			<td><input type="text" name="id" /></td>
@@ -29,8 +30,20 @@ div.ex {
 			<td><input type="password" name="password" /></td>
 			</tr>
 			<tr>
+			<td>이름</td>
+			<td><input type="text" name="name" /></td>
+			</tr>
+			<tr>
+			<td>성별</td>
+			<td><input type="radio" name="gender" value="남자" />남자</td>
+			<td><input type="radio" name="gender" value="여자" />여자</td>
+			</tr>
+			<td>이메일</td>
+			<td><input type="text" name="email" /></td>
+			</tr>
+			<tr>
 			<td></td>
-			<td><input type="submit" value="login"/></td>
+			<td><input type="submit" value="register"/></td>
 			</tr>
 			</table>
 	</div>

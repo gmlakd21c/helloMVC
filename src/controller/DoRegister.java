@@ -1,8 +1,6 @@
 package controller;
 
-import java.awt.List;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,16 +13,16 @@ import model.Customer;
 import service.CustomerService;
 
 /**
- * Servlet implementation class DoLogin
+ * Servlet implementation class DoRegister
  */
-@WebServlet("/doLogin")
-public class DoLogin extends HttpServlet {
+@WebServlet("/doRegister")
+public class DoRegister extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DoLogin() {
+    public DoRegister() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,26 +30,38 @@ public class DoLogin extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String gender = request.getParameter("gender");
 		
 		CustomerService service = (CustomerService) CustomerService.getInstance();
-		Customer customer = service.login(id,password);
+		Customer customer= new Customer(id, password, name, email, gender);
+		service.addCustomer(customer);
 		
 		String page = null;
 		if(customer == null){
-			page = "/view/loginFail.jsp";
-			request.setAttribute("id", id);
+			page="/view/registerFail.jsp";
+			request.setAttribute("customer", customer);
 		}
 		else{
-			page="/view/loginSuccess.jsp";
+			page = "/view/registerSuccess.jsp";
 			request.setAttribute("customer", customer);
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 		dispatcher.forward(request, response);
-	} 
+	}
+
 }
